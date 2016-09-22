@@ -1,0 +1,44 @@
+#! /usr/local/bin/node
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {character}
+ */
+var _ = require('lodash');
+var lib = require('./lib');
+
+var findTheDifference = function(s, t) {
+  var c_map = {};
+  for(var k = 0; k < s.length; k++) {
+    var v = s[k];
+    if (!c_map[v]) c_map[v] = 0;
+    c_map[v]++;
+  }
+  for(var k = 0; k < t.length; k++) {
+    var v = t[k];
+    c_map[v]--;
+  }
+  var rzt = '';
+  for(var k in c_map) {
+    var v = c_map[k];
+    if (v < 0 || isNaN(v)){
+      rzt = k;
+      break;
+    }
+  }
+  return rzt;
+};
+
+
+var test = () => {
+  var len = 10000000;
+  var s = lib.genStr(len);
+  var t = lib.genT(s);
+  console.time('test');
+  var rzt = findTheDifference(s, t);
+  // var rzt = findTheDifference('abcd', 'abcde');
+  console.log(`rzt: ${rzt}`);
+  console.timeEnd('test');
+}
+
+test();
