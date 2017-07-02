@@ -15,12 +15,6 @@ var lengthOfLongestSubstring = function(s) {
     }
     var curCharIdxArray = charPos[curChar];
     curCharIdxArray.push(i);
-    if (curCharIdxArray.length > 2) {
-      var previousLength = curCharIdxArray[1] - curCharIdxArray[0];
-      var currLength = curCharIdxArray[2] - curCharIdxArray[1];
-      charPos[curChar] = previousLength > currLength ? [curCharIdxArray[0], curCharIdxArray[1]] : 
-        [curCharIdxArray[1], curCharIdxArray[2]];
-    }
   }
   for(var char in charPos) {
     // only once
@@ -31,6 +25,24 @@ var lengthOfLongestSubstring = function(s) {
       length = s.length - charPos[char][0];
     } else {
       length = charPos[char][1] - charPos[char][0];
+      for(var insideChar in charPos) {
+        if (insideChar === char || charPos[insideChar].length === 1) {
+          continue;
+        }
+        for(var i = 0; i < charPos[insideChar].length - 1; i++) {
+          var insideBegin = charPos[insideChar][i];
+          var insideEnd = charPos[insideChar][i+1];
+          console.log('inside', insideChar, insideBegin, insideEnd)
+          if (insideBegin > start && insideEnd < end) {
+            console.log('inside overlap', insideChar, insideBegin, insideEnd)            
+            var curGap = start - insideBegin;
+            if (curGap < length) {
+              length = curGap;
+              end = insideBegin;
+            }
+          }
+        }
+      }
     }
     if (length > longest.length) {
       longest = {
