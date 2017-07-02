@@ -7,4 +7,5 @@ var addDigits = function(num) {
     return num === 0 ? 0 : (rzt === 0 ? 9 : rzt);
     // Find out this solution after bunch of times of staring into the equations.
     // But still don't know the reason here.  
+    // https://en.wikipedia.org/wiki/Digital_root
 };
