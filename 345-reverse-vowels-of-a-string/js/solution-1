@@ -1,0 +1,33 @@
+#! /usr/local/bin/node
+'use strict';
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var reverseVowels = function(s) {
+  var vowels = ['a', 'e', 'i', 'o', 'u'];
+  var vowels_in_str = [];
+  s = s.split('');
+  for (var i = 0 ; i < s.length; i++) {
+    if (vowels.indexOf(s[i].toLowerCase()) < 0)
+      continue;
+    vowels_in_str.push({char: s[i], pos: i});
+  }
+  // console.log(vowels_in_str);
+  while (vowels_in_str.length) {
+    var head = vowels_in_str.shift();
+    var tail = vowels_in_str.pop();
+    if (!tail)
+      break;
+    // console.log(`swtich ${JSON.stringify(head)} <-> ${JSON.stringify(tail)}`);
+    s[tail.pos] = head.char;
+    s[head.pos] = tail.char;
+  }
+  return s.join('');
+};
+
+
+console.log(reverseVowels('hello'));
+console.log(reverseVowels('leetcode'));
+console.log(reverseVowels('fantestic'));
