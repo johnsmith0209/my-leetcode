@@ -10,6 +10,9 @@ type ListNode struct {
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	head, l1Cur, l2Cur := &ListNode{Val: 0, Next: nil}, l1, l2
 	newCur, isHead := head, true
+	if l1 == nil && l2 == nil {
+		return nil
+	}
 	for l1Cur != nil || l2Cur != nil {
 		next, curList := l1Cur, 1
 		if l1Cur == nil && l2Cur != nil {
