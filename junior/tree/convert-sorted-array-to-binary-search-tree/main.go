@@ -36,8 +36,8 @@ func buildTree2(nums []int, l, r int) *TreeNode {
 	mid := (l + r) / 2
 	root := &TreeNode{
 		Val:   nums[mid],
-		Left:  buildTree(nums, l, mid-1),
-		Right: buildTree(nums, mid+1, r),
+		Left:  buildTree2(nums, l, mid-1),
+		Right: buildTree2(nums, mid+1, r),
 	}
 	return root
 }
