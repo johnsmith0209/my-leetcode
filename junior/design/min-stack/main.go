@@ -15,29 +15,22 @@ func (this *MinStack) Push(x int) {
 	if len(this.stack) == 0 {
 		this.stack = []int{x}
 		this.minStack = []int{x}
-		fmt.Println("init", this.minStack, this.stack)
 		return
 	}
 	min := this.GetMin()
-	fmt.Println("before push", this.minStack, this.stack)
 	// multiple push when equals to min
 	if x <= min {
 		this.minStack = append(this.minStack, x)
-		fmt.Println("before push minStack", this.minStack)
 	}
 	this.stack = append(this.stack, x)
-	fmt.Println("after push stack", this.stack)
 }
 
 func (this *MinStack) Pop() {
 	last, min := this.stack[len(this.stack)-1], this.GetMin()
-	fmt.Println("before pop", this.minStack, this.stack)
 	if min == last {
 		this.minStack = this.minStack[0 : len(this.minStack)-1]
-		fmt.Println("after pop minStack", this.minStack)
 	}
 	this.stack = this.stack[0 : len(this.stack)-1]
-	fmt.Println("after pop stack", this.stack)
 }
 
 func (this *MinStack) Top() int {
